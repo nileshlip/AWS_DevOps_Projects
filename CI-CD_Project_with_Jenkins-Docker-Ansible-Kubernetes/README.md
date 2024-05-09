@@ -126,9 +126,9 @@ amazon-linux-extras install java-openjdk11
 
 ```sh
 cd /opt
-wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.23/bin/apache-tomcat-10.1.23-deployer.tar.gz
-tar -zxvf apache-tomcat-10.1.23-deployer.tar.gz
- mv apache-tomcat-10.1.23-deployer tomcat
+wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.23/bin/apache-tomcat-10.1.23.tar.gz
+tar -zxvf apache-tomcat-10.1.23.tar.gz
+ mv apache-tomcat-10.1.23 maven
 ```
 - Now we can start our Tomcat server
 
