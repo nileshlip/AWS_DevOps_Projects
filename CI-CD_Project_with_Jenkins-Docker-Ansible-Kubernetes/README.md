@@ -74,7 +74,7 @@ tar -xvzf apache-maven-3.9.6-bin.tar.gz
 mv apache-maven-3.9.6 maven
 ```
 
-- Next configure `M2_HOME` and `M2`(binary directory) environment variables and add them to the `PATH` so that we can run `maven` commands in any directory. You can search where is your JVM by using t`find / -name java-17*`
+- Next configure `M2_HOME` and `M2`(binary directory) environment variables and add them to the `PATH` so that we can run `maven` commands in any directory. You can search where is your JVM by using t`find / -name java-171*`
 
 - Now you need to edit .bash_profile to add these variables to path and save 
 ```sh
@@ -127,7 +127,7 @@ amazon-linux-extras install java-openjdk11
 cd /opt
 wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.23/bin/apache-tomcat-10.1.23.tar.gz
 tar -zxvf apache-tomcat-10.1.23.tar.gz
- mv apache-tomcat-10.1.23 maven
+ mv apache-tomcat-10.1.23 tomcat
 ```
 - Now we can start our Tomcat server
 
