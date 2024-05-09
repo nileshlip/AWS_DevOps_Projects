@@ -47,6 +47,7 @@ JobName: HelloWorldJob
 Type: Free Style Project
 Build Step: Execute shell
 echo "Hello World!"
+save -> build now
 ```
 
 ### Step2: Integrate Git with Jenkins
@@ -68,18 +69,18 @@ Save -> Build Now
 
 ```sh
 cd /opt
-sudo wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz 
-tar -xvzf apache-maven-3.8.6-bin.tar.gz 
-mv apache-maven-3.8.6-bin maven
+sudo wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz 
+tar -xvzf apache-maven-3.9.6-bin.tar.gz
+mv apache-maven-3.9.6 maven
 ```
 
-- Next configure `M2_HOME` and `M2`(binary directory) environment variables and add them to the `PATH` so that we can run `maven` commands in any directory. You can search where is your JVM by using t`find / name java-11*`
+- Next configure `M2_HOME` and `M2`(binary directory) environment variables and add them to the `PATH` so that we can run `maven` commands in any directory. You can search where is your JVM by using t`find / -name java-17*`
 
 - Now you need to edit .bash_profile to add these variables to path and save 
 ```sh
 M2_HOME=/opt/maven
 M2=/opt/maven/bin
-JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.16.0.8-1.amzn2.0.1.x86_64
+JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64
 
 PATH=$PATH:$HOME/bin:$M2_HOME:$M2:$JAVA_HOME
 export PATH
@@ -97,6 +98,7 @@ Name = FirstMavenProject
 Type: Maven Project
 Root Pom: pom.xml
 Goals and options: clean install
+Save -> Build Now
 ```
 
 - now we can go to `/var/lib/jenkins/workspace/FirstMavenProject/webapp/target` to see our build artifact webapp.war file.
@@ -123,9 +125,10 @@ amazon-linux-extras install java-openjdk11
 - Next we will install Tomcat, switch to `/opt` directory 
 
 ```sh
-wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.68/bin/apache-tomcat-9.0.68.tar.gz
-tar -xvzf apache-tomcat-9.0.68.tar.gz
-mv apache-tomcat-9.0.68.tar.gz tomcat
+cd /opt
+wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.23/bin/apache-tomcat-10.1.23-deployer.tar.gz
+tar -zxvf apache-tomcat-10.1.23-deployer.tar.gz
+ mv apache-tomcat-10.1.23-deployer tomcat
 ```
 - Now we can start our Tomcat server
 
