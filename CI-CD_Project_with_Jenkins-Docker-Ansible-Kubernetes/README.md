@@ -57,7 +57,7 @@ save -> build now
 - Now we can run our Second job to check `Github integration` is working as expected. Create another FreeStyleJob as below:
 ```sh
 SCM: Git
-URL: https://github.com/rumeysakdogan/hello-world.git
+URL: https://github.com/nileshlip/hello-world-Projects.git
 Save -> Build Now
 ```
 
@@ -96,7 +96,7 @@ export PATH
 ```sh
 Name = FirstMavenProject
 Type: Maven Project
-URL: https://github.com/rumeysakdogan/hello-world.git
+URL: https://github.com/nileshlip/hello-world-Projects.git
 Root Pom: pom.xml
 Goals and options: clean install
 Save -> Build Now
@@ -206,7 +206,7 @@ pwd: deployer
 - Now we can create our next job with name of `BuildAndDeployJob`. After build step, the artifact will stored under `webapp/target/` directory as `webapp.war`.  
 ```sh
 Kind: Maven Project
-SCM: https://github.com/rumeysakdogan/hello-world.git
+SCM: https://github.com/nileshlip/hello-world-Projects.git
 Goal and options: clean install
 Post Build Actions: Deploy war/ear to a container
 WAR/EAR files: **/*.war
@@ -351,7 +351,7 @@ provide password
 ```sh
 Name: BuildAndDeployOnContainer
 Type: Maven Project
-SCM: https://github.com/rumeysakdogan/hello-world.git
+SCM: https://github.com/nileshlip/hello-world-Projects.git
 POLL SCM: * * * * *
 Build Goals: clean install
 Post build actions: Send build artifacts over ssh
