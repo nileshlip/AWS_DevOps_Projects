@@ -242,7 +242,8 @@ Security Group:
 
 - Login to `Docker-Host` server via SSH,  switch to root user `sudo su -` and install docker
 ```sh
-yum install -y
+yum install docker -y
+systemctl start docker
 ```
 
 ### Step2: Create Tomcat container
