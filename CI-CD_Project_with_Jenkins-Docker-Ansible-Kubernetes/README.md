@@ -68,13 +68,14 @@ Save -> Build Now
 - We need to install MAVEN in Jenkins server. 
 
 ```sh
+yum install java -y
 cd /opt
 sudo wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz 
 tar -xvzf apache-maven-3.9.6-bin.tar.gz
 mv apache-maven-3.9.6 maven
 ```
 
-- Next configure `M2_HOME` and `M2`(binary directory) environment variables and add them to the `PATH` so that we can run `maven` commands in any directory. You can search where is your JVM by using t`find / -name java-171*`
+- Next configure `M2_HOME` and `M2`(binary directory) environment variables and add them to the `PATH` so that we can run `maven` commands in any directory. You can search where is your JVM by using t`find / -name java-11*`
 
 - Now you need to edit .bash_profile to add these variables to path and save 
 ```sh
@@ -95,6 +96,7 @@ export PATH
 ```sh
 Name = FirstMavenProject
 Type: Maven Project
+URL: https://github.com/rumeysakdogan/hello-world.git
 Root Pom: pom.xml
 Goals and options: clean install
 Save -> Build Now
