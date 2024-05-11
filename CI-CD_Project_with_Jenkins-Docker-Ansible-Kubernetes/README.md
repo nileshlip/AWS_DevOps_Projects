@@ -358,7 +358,7 @@ Post build actions: Send build artifacts over ssh
 SSH server: dockerhost
 TransferSet: webapp/target/*.war
 Remove prefix: webapp/target
-Remote directory: /home/dockeradmin
+Remote directory: /home/dockeradmin   (//opt//docker)
 ```
 
 - Save and build, we can check under dockerhost server if webapp successfully send to /home/dockeradmin by using SSH.
