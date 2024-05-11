@@ -555,6 +555,10 @@ systemctl status docker
 - We will create same Dockerfile under `docker` directory in Ansible host.
 We can create image and run container from this image in `ansible` server.
 ```sh
+FROM tomcat:latest
+RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps/
+COPY ./*.war /usr/local/tomcat/webapps
+-----------------
 docker build -t regapp:v1 .
 docker run -t --name regapp-server -p 8081:8080 regapp:v1
 ```
@@ -603,8 +607,8 @@ Login Succeeded
 - If we want to push an image to our dockerhub it has to be tagged with our docker username. We can tag an existing image by using `docker tag` command like shown below.
 
 ```sh
-docker tag <image-id> rumeysakdogan/regapp:tagname
-docker push rumeysakdogan/regapp:tagname
+docker tag <image-id> nilipane23/regapp:tagname
+docker push nilipane23/regapp:tagname
 ```
 
 - Now we can update our playbook to add new tasks.
@@ -618,10 +622,10 @@ docker push rumeysakdogan/regapp:tagname
       args:
         chdir: /opt/docker
     - name: create tag to push image onto dockerhub
-      command: docker tag regapp:latest rumeysakdogan/regapp:latest
+      command: docker tag regapp:latest nilipane23/regapp:latest
 
     - name: push docker image
-      command: docker push rumeysadogan/regapp:latest
+      command: docker push nilipane23/regapp:latest
 ```
 
 - We can dry-run our playbook by giving `--check` flag.
@@ -649,7 +653,7 @@ exec command: ansible-playbook /opt/docker/regapp.yml
 
   tasks:
     - name: create container
-      command: docker run -d --name regapp-server -p 8082:8080 rumeysakdogan/regapp:latest 
+      command: docker run -d --name regapp-server -p 8082:8080 nilipane23/regapp:latest 
 ```
 
 - But we have a problem in this playbook, when we try to run the same playbook again, it will give an error saying `regapp-server container already exists.` To fix this problem, we will add below tasks to our playbook.
@@ -674,11 +678,11 @@ exec command: ansible-playbook /opt/docker/regapp.yml
       ignore_errors: yes
 
     - name: remove the existing image
-      command: docker rmi rumeysakdogan/regapp:latest
+      command: docker rmi nilipane23/regapp:latest
       ignore_errors: yes
 
     - name: create container
-      command: docker run -d --name regapp-server -p 8082:8080 rumeysakdogan/regapp:latest 
+      command: docker run -d --name regapp-server -p 8082:8080 nilipane23/regapp:latest 
       ignore_errors: yes
 ```
 
@@ -747,7 +751,7 @@ spec:
     spec:
       containers:
       - name: regapp
-        image: rumeysakdogan/regapp
+        image: nilipane23/regapp
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
