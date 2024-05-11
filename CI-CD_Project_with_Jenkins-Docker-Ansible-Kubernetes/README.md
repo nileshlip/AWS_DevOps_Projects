@@ -524,9 +524,11 @@ password
 
 - Now we can create our Jenkins job:
 ```sh
-Name: CopyArtifactsOntoAnsible
-Copy from: BuildAndDeployOnContainer
+Install Plugin - copy artifact
+Job Name: CopyArtifactsOntoAnsible
+buid step: BuildAndDeployOnContainer (last job name)
 Post build actions: ansiblehost
+source - **/*.war
 delete exec commands
 ```
 - Go to ansible server, we need to create `/opt/docker` directory and give ownership to `ansadmin`
