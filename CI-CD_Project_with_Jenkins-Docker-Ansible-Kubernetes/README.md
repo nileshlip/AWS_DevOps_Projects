@@ -526,10 +526,16 @@ password
 ```sh
 Install Plugin - copy artifact
 Job Name: CopyArtifactsOntoAnsible
-buid step: BuildAndDeployOnContainer (last job name)
+SCM : https://github.com/nileshlip/hello-world-Projects.git
+Poll SCM * * * * *
+buid step: choose Copy artifacts from another project
+project  nbame -BuildAndDeployOnContainer (last job name)
+Artifacts to copy - **/*.war
+choose - Flatten directories
+ 
 Post build actions: ansiblehost
 source - **/*.war
-delete exec commands
+Remote Directory - //opt//docker/
 ```
 - Go to ansible server, we need to create `/opt/docker` directory and give ownership to `ansadmin`
 ```sh
@@ -701,8 +707,19 @@ ansible-playbook /opt/docker/regapp-deploy.yml
 
 ```YAML
 - Latest version of AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
-- kubectl latest version: https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+- kubectl latest version:
+sudo curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
+sudo chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+
 - eksctl latest version: https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
+sudo curl -o eksctl https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_linux_amd64.tar.gz
+sudo tar -xvf eksctl_linux_amd64.tar.gz
+sudo mv eksctl /usr/local/bin
+-------------
+verify installation
+kubectl version --short --client
+eksctl version
 - IAM Role with required priviledges
 ```   
 
@@ -712,9 +729,6 @@ eksctl create cluster --name rd-cluster \
 --region us-east-1 \
 --node-type t2.small 
 ```
-- To delete cluster, run below command:
-```sh
-eksctl delete cluster --name rumeysa-cluster
 ```
 
 ## Integrating Kubernetes with CI/CD pipeline
@@ -919,7 +933,9 @@ kubectl delete service rumeysa-service
     - name: create loadbalancer service on kubernetes
       command: kubectl apply -f regapp-service.yml
 ```
-
+- To delete cluster, run below command:
+```sh
+eksctl delete cluster --name rumeysa-cluster
 ### Step5: CI Job to create Image for Kubernetes
 
 - Here we will just create a job named `RegApp_CI_Job` by using exieting job `CopyArtifactOntoDocker`. Last time we renamed our playbook, we will just update that in Exec Command section
